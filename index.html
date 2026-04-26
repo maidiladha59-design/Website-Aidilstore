@@ -1,0 +1,169 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aidil Store Premium</title>
+<style>.card{
+position:relative;
+}
+    
+body{margin:0;font-family:Poppins;background:#0f172a;color:#fff}
+.header{background:linear-gradient(135deg,#ffd700,#b8962e);padding:15px;text-align:center;font-size:20px;font-weight:bold}
+.logo{width:40px;vertical-align:middle;margin-right:8px}
+.container{padding:10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.card{background:#1e293b;border-radius:15px;padding:10px;box-shadow:0 5px 15px rgba(0,0,0,.3);transition:.3s}
+.card:hover{transform:scale(1.04)}
+img{width:100%;border-radius:10px}
+.title{color:#ffd700;font-weight:bold;font-size:14px}
+.price{color:#00ffae;font-weight:bold}
+button{background:linear-gradient(135deg,#ffd700,#b8962e);border:none;padding:8px;border-radius:10px;color:#000;width:100%;margin-top:5px;font-weight:bold}/* popup */ .popup{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);display:none;justify-content:center;align-items:center} .popup-content{background:#1e293b;padding:20px;border-radius:15px;text-align:center;width:90%;max-width:350px} .popup img{width:200px;margin:10px 0} .close{background:red;color:#fff;border:none;padding:5px 10px;border-radius:5px;margin-top:10px}
+
+/* @keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+@keyframes zoomIn{
+from{transform:scale(0.7);opacity:0}
+to{transform:scale(1);opacity:1}
+}emoji */ .emoji{position:fixed;font-size:18px;animation:floatUp .8s ease-out forwards} @keyframes floatUp{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-60px)}} </style>
+
+</head>
+<body><div class="header">
+<img src="LogoAidilstore.png" class="logo"> Aidil Store Premium
+</div><div class="container">
+<div class="grid" id="produkList"></div><div style="background:#111827;padding:15px;border-radius:15px;margin-top:15px">
+
+<h3 style="color:#ffd700;">🛒 Tentang Aidil Store</h3>
+<p>
+Aidil Store adalah toko digital terpercaya yang menyediakan berbagai akun premium dengan harga terjangkau 💎  
+Kami sudah melayani banyak pembeli dengan proses cepat, aman, dan bergaransi!
+</p>
+
+<p>✔️ Proses cepat (1–10 menit)</p>
+<p>✔️ Aman & terpercaya</p>
+<p>✔️ Support fast respon</p>
+<p>✔️ Banyak testimoni positif</p>
+
+<hr style="border:1px solid #333;margin:10px 0;">
+
+<h3 style="color:#ffd700;">📦 Cara Order</h3>
+
+<p>1. Pilih produk yang ingin dibeli</p>
+<p>2. Klik tombol <b>Beli</b></p>
+<p>3. Lakukan pembayaran via QRIS / DANA / Bank</p>
+<p>4. Klik <b>“Saya Sudah Bayar”</b></p>
+<p>5. Kirim bukti pembayaran ke WhatsApp</p>
+<p>6. Tunggu proses, produk akan dikirim 📲</p>
+<h3 style="color:#ffd700;">⭐ Testimoni</h3>
+<p>“Fast respon, langsung diproses!”</p>
+<p>“Harga murah banget dibanding tempat lain”</p>
+<p>“Udah langganan disini 🔥”</p>
+<hr style="border:1px solid #333;margin:10px 0;">
+
+<p style="color:#00ffae;">
+⚡ Note: Pastikan data pembayaran benar sebelum transfer!
+</p>
+
+</div><p>⭐ Sudah dipercaya 100+ pembeli</p>
+<p>📲 Fast respon admin</p>
+</div><!-- POPUP --><div id="popup" class="popup">
+<div class="popup-content">
+<h3>Pembayaran</h3>
+<p>Scan QRIS / Transfer</p>
+<img src="qris.jpg">
+<p><b>DANA:</b> 0895428242365</p>
+<p><b>Via Transfer bank 🏦:</b><br>100330593564</p>
+<button onclick="kirimWA()">Saya Sudah Bayar</button>
+<br>
+<button class="close" onclick="tutupPopup()">Tutup</button>
+</div>
+</div><script>
+const wa="https://wa.me/6285834043432";
+let currentProduk="";
+let currentHarga="";
+
+// PRODUK LENGKAP
+const produk=[
+{name:"CANVA PRO 1 BULAN",harga:1800+1323,img:"canvapro.png"},
+{name:"CAPCUT PRO 1 BULAN",harga:13500+1323,img:"cangcut.png"},
+{name:"CHATGPT PRO PRIVATE 1 BULAN",harga:45000+1323,img:"chatgpt.png"},
+{name:"CHATGPT GO 1 TAHUN",harga:49500+1323,img:"chatgptgo.jpg"},
+{name:"CHATGPT PRO 2 TAHUN",harga:315000+1323,img:"chatgpt2thun.jpg"},
+{name:"CHATGPT PRO SHARING 1 BULAN",harga:22500+1323,img:"cc.jpg"},
+{name:"DUOLINGO SUPER PRO 1 BULAN",harga:9900+1323,img:"Duolingo-logo.png"},
+{name:"GEMINI PRO 1 BULAN",harga:4500+1323,img:"500px-Google_Gemini_icon_2025.svg.png"},
+{name:"GEMINI PRO 3 BULAN",harga:9000+1323,img:"lg-65e571e491ee6-Google-Gemini.webp"},
+{name:"GDRIVE 200GB PERMANEN",harga:36000+1323,img:"google-drive-icon-logo-symbol-free-png.png"},
+{name:"GDRIVE 400GB PERMANEN",harga:54000+1323,img:"google-drive-icon-logo-symbol-free-png.png"},
+{name:"ALIGHT MOTION 1 TAHUN",harga:3600+1323,img:"Alight-Motion-App-Icon-Motion-Graphics-Editing-Logo-768x768.webp"},
+{name:"GROK AI PRO 1 BULAN",harga:36000+1323,img:"3d-grok-app-logo-transparent-background-free-png.png"},
+{name:"MICROSOFT LIFETIME",harga:36000+1323,img:"microsoft-logo-microsoft-icon-transparent-free-png.png"},
+{name:"PICSART PRO 1 BULAN",harga:6300+1323,img:"a489a3d8a37d8638613e4af1945ef50d.jpg"},
+{name:"PRIME VIDEO 1 BULAN",harga:12600+1323,img:"amazon-prime-ios-app-icon-701751695133984u2yuon8nlu.png"},
+{name:"SCRIBD PRO 1 BULAN",harga:5400+1323,img:"5d212d56a9640b160cfce9a5a95c62cb.jpg"},
+{name:"VIDIO PLATINUM 1 TAHUN",harga:9000+1323,img:"vidio-new-icon-illustration-in-square-background-free-vector.jpg"},
+{name:"VIU PRO 1 TAHUN",harga:1800+1323,img:"Desain-tanpa-judul-4.png"},
+{name:"VIU PRO PERMANEN",harga:4500+1323,img:"png-clipart-viutv-korean-drama-television-show-hairdressing-vip-card-television-text-thumbnail.png"},
+{name:"VPN EXPRESS PRO 1 BULAN",harga:9000+1323,img:"express-vpn.jpg"},
+{name:"VPN HMA PRO 1 BULAN",harga:9000+1323,img:"hma-vpn-logo.png"},
+{name:"ZOOM PRO 14 HARI",harga:7200+1323,img:"logo-zoom-persegi-terisolasi-pada-latar-belakang-putih_469489-910.jpg"}
+];
+
+const list=document.getElementById('produkList');
+
+produk.forEach(p=>{
+let el=document.createElement('div');
+el.className='card';
+el.onclick=(e)=>spawnEmoji(e);
+el.innerHTML=`
+
+<div style="position:absolute;top:10px;left:10px;
+background:red;color:white;padding:3px 8px;
+border-radius:8px;font-size:10px;">
+BEST SELLER
+</div>
+
+<img src='${p.img}'>
+<div class='title'>${p.name}</div>
+<div class='price'>Rp ${p.harga.toLocaleString()}</div>
+<button onclick="event.stopPropagation();bayar('${p.name}','${p.harga}')">Beli</button>
+
+`;
+list.appendChild(el);
+});
+
+function bayar(nama,harga){
+currentProduk=nama;
+currentHarga=harga;
+document.getElementById('popup').style.display='flex';
+}
+
+function tutupPopup(){document.getElementById('popup').style.display='none';}
+
+function kirimWA(){
+let pesan=`Halo Admin Aidil Store%0A%0ASaya sudah bayar:%0A${currentProduk}%0AHarga: Rp ${currentHarga}%0AMohon diproses`;
+window.open(`${wa}?text=${pesan}`,'_blank');
+}
+
+function spawnEmoji(e){
+let emoji=['✨','💖','💎'];
+for(let i=0;i<2;i++){
+let span=document.createElement('span');
+span.className='emoji';
+span.innerText=emoji[Math.floor(Math.random()*emoji.length)];
+span.style.left=(e.clientX)+'px';
+span.style.top=(e.clientY)+'px';
+document.body.appendChild(span);
+setTimeout(()=>span.remove(),800);
+}
+}
+</script><a href="https://wa.me/6285834043432" 
+style="position:fixed;bottom:20px;right:20px;background:#25D366;
+color:white;padding:12px 15px;border-radius:50px;text-decoration:none;
+font-weight:bold;box-shadow:0 5px 15px rgba(0,0,0,.3)">
+Chat Admin
+</a></body>
+</html>
+</div>
